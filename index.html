@@ -108,12 +108,13 @@
         /* Mejora el reproductor de audio */
 audio {
   width: 100%;
-  height: 55px;
+  height: 65px; /* aumentamos un poco la altura*/
   border-radius: 30px; /* Hace las esquinas más redondeadas y suaves */
   background-color: rgba(26, 26, 26, 0.95);
   border: 2px solid rgba(168, 85, 247, 0.3);
-  padding: 0 12px;
+  padding: 0 15px; /* Mas espacio interno*/
   outline: none;
+  overflow: visible; /*evita que se oculten controles*/
 }
 
 /* Estilos para navegadores Chrome/Safari */
@@ -142,19 +143,7 @@ audio::-webkit-media-controls-time-remaining-display {
   font-size: 14px;
   font-weight: 500;
 }
-
-audio::-webkit-media-controls-timeline {
-  background-color: rgba(100, 100, 100, 0.5);
-  border-radius: 20px;
-  height: 8px;
-  margin: 0 10px;
-}
-
-audio::-webkit-media-controls-volume-slider {
-  background-color: rgba(100, 100, 100, 0.5);
-  border-radius: 20px;
-  height: 8px;
-}
+      
       /* Estilos para Firefox */
  audio::-moz-range-track {
    background-color: rgba(100, 100, 100, 0.5);

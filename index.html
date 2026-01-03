@@ -105,118 +105,106 @@
         font-size: 1.8rem;
       }
       
-        /* Mejora el reproductor de audio */
-audio {
+        /* Reproductor personalizado SIN CONTROLES NATIVOS */
+.audio-container {
+  position: relative;
   width: 100%;
-  height: 65px; /* aumentamos un poco la altura*/
-  border-radius: 30px; /* Hace las esquinas más redondeadas y suaves */
+  height: 70px;
   background-color: rgba(26, 26, 26, 0.95);
   border: 2px solid rgba(168, 85, 247, 0.3);
-  padding: 0 15px; /* Mas espacio interno*/
-  outline: none;
-  overflow: visible; /*evita que se oculten controles*/
-}
-
-/* Estilos para navegadores Chrome/Safari */
-audio::-webkit-media-controls-panel {
-  background-color: rgba(26, 26, 26, 0.95);
   border-radius: 30px;
-  border: none;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.7);
 }
 
-audio::-webkit-media-controls-play-button {
-  background-color: rgba(168, 85, 247, 0.8);
-  border-radius: 50%; /* Hace el botón completamente redondo */
+/* Botón de play/pausa */
+.play-btn {
   width: 35px;
   height: 35px;
-  margin-right: 10px;
-  box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+  background-color: rgba(168, 85, 247, 0.8);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
 }
 
-audio::-webkit-media-controls-play-button:hover {
-  background-color: rgba(168, 85, 247, 1); /* Más brillante al pasar el mouse */
+.play-btn:hover {
+  background-color: #a855f7;
 }
 
-audio::-webkit-media-controls-current-time-display,
-audio::-webkit-media-controls-time-remaining-display {
-  color: white; /* Texto blanco limpio */
+/* Barra de progreso */
+.progress-container {
+  flex: 1;
+  height: 8px;
+  background-color: rgba(100, 100, 100, 0.5);
+  border-radius: 20px;
+  position: relative;
+  margin-right: 15px;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #a855f7;
+  border-radius: 20px;
+  width: 0%;
+}
+
+/* Tiempo */
+.time-display {
+  color: white;
   font-size: 14px;
-  font-weight: 500;
-}
-      
-      /* Estilos para Firefox */
- audio::-moz-range-track {
-   background-color: rgba(100, 100, 100, 0.5);
-   border-radius: 20px;
-   height: 8px;
- }
- audio::-moz-range-thumb {
-   background-color: #a855f7;
-   border-radius: 50%;
-   width: 15px;
-   height: 15px;
- }
- /* Quitar bordes extra */
- audio:focus {
-   outline: none;
-   box-shadow: 0 0 15px rgba(168, 85, 247, 0.7);
- }
-      /* Estilos para control de volumen vertical en celulares */
-@media only screen and (max-width: 768px) {
-  audio {
-    height: 70px;
-    position: relative;
-    padding-right: 50px; /* Espacio para que no se solape el volumen */
-  }
-
-  /* Mover el icono de volumen y slider más a la derecha */
-  audio::-webkit-media-controls-volume-control-container {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 30px;
-    height: 30px;
-  }
-
-  audio::-webkit-media-controls-volume-slider {
-    position: absolute;
-    top: -90px; /* Más arriba para no solapar */
-    right: 0;
-    width: 15px;
-    height: 60px;
-    background-color: rgba(26, 26, 26, 0.95);
-    border-radius: 10px;
-    padding: 5px;
-    border: 1px solid #a855f7;
-    transition: all 0.2s ease;
-    display: none; /* Ocultar hasta que se toque */
-  }
-
-  audio::-webkit-media-controls-volume-slider::-webkit-slider-thumb {
-    width: 13px;
-    height: 13px;
-    background-color: #a855f7;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-
-  /* Mostrar solo cuando se toque el icono de volumen */
-  audio::-webkit-media-controls-volume-control-container:hover + audio::-webkit-media-controls-volume-slider,
-  audio::-webkit-media-controls-volume-control-container:focus + audio::-webkit-media-controls-volume-slider,
-  audio::-webkit-media-controls-volume-slider:hover {
-    display: block;
-  }
+  margin-right: 15px;
 }
 
-/* Mantener el control horizontal en computadoras */
-@media only screen and (min-width: 769px) {
-  audio::-webkit-media-controls-volume-slider {
-    display: inline-block;
-    width: 60px;
-    height: 8px;
-    margin-left: 10px;
-  }
+/* Control de volumen vertical */
+.volume-container {
+  position: relative;
+}
+
+.volume-btn {
+  width: 25px;
+  height: 25px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.volume-slider {
+  position: absolute;
+  top: -80px;
+  right: 0;
+  width: 15px;
+  height: 60px;
+  background-color: rgba(26, 26, 26, 0.95);
+  border: 1px solid #a855f7;
+  border-radius: 10px;
+  padding: 5px;
+  display: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  background-color: #a855f7;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.volume-container:hover .volume-slider {
+  display: block;
 }
       
     </style>
@@ -232,9 +220,18 @@ audio::-webkit-media-controls-time-remaining-display {
 
       <div class="cancion-card">
         <h3>Tinkuy</h3>
-        <audio controls>
-          <source src="audio/tinkuy.mp3" type="audio/mpeg">
-          Tu navegador no soporta el reproductor de audio.
+        <div class="audio-container">
+  <button class="play-btn" onclick="togglePlay('tinkuy-audio')">▶️</button>
+  <div class="progress-container">
+    <div class="progress-bar" id="tinkuy-progress"></div>
+  </div>
+  <div class="time-display" id="tinkuy-time">0:00 / 4:31</div>
+  <div class="volume-container">
+    <button class="volume-btn" onclick="toggleVolume()">🔊</button>
+    <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.1" value="1">
+  </div>
+  <audio id="tinkuy-audio" src="audio/tinkuy.mp3" type="audio/mpeg">
+</div>
         
       </div>
 
@@ -254,5 +251,48 @@ audio::-webkit-media-controls-time-remaining-display {
         
       </div>
     </div>
+    <script>
+// Función para play/pausa
+function togglePlay(audioId) {
+  const audio = document.getElementById(audioId);
+  const btn = document.querySelector(`[onclick="togglePlay('${audioId}')"]`);
+  if (audio.paused) {
+    audio.play();
+    btn.innerHTML = "⏸️";
+  } else {
+    audio.pause();
+    btn.innerHTML = "▶️";
+  }
+  // Actualizar barra de progreso
+  setInterval(() => {
+    const progress = document.getElementById(`${audioId.split('-')[0]}-progress`);
+    const timeDisplay = document.getElementById(`${audioId.split('-')[0]}-time`);
+    const duration = audio.duration;
+    const currentTime = audio.currentTime;
+    if (duration) {
+      const percent = (currentTime / duration) * 100;
+      progress.style.width = percent + "%";
+      // Formatear tiempo
+      const current = formatTime(currentTime);
+      const total = formatTime(duration);
+      timeDisplay.innerHTML = `${current} / ${total}`;
+    }
+  }, 1000);
+}
+
+// Función para formatear tiempo
+function formatTime(seconds) {
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${mins}:${secs < 10 ? '0' + secs : secs}`;
+}
+
+// Función para control de volumen
+const volumeSlider = document.getElementById('volume-slider');
+const audio = document.getElementById('tinkuy-audio');
+volumeSlider.addEventListener('input', () => {
+  audio.volume = volumeSlider.value;
+});
+</script>
   </body>
 </html>

@@ -104,7 +104,34 @@
         margin-right: 15px;
         font-size: 1.8rem;
       }
-      
+      .cancion-card {
+  width: 100%;
+  max-width: 450px; /* Ajusta este valor si quieres un ancho máximo */
+  margin: 15px auto; /* Centra las tarjetas y agrega espacio entre ellas */
+  padding: 15px;
+  background-color: rgba(40, 40, 40, 0.8);
+  border-radius: 20px;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
+}
+
+.cancion-card h3 {
+  color: white;
+  font-size: 18px;
+  margin: 0 0 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cancion-card h3::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: url('https://cdn-icons-png.flaticon.com/512/1077/1077035.png') no-repeat center;
+  background-size: 100%;
+  filter: invert(1) sepia(20%) saturate(5000%) hue-rotate(260deg) brightness(0.9);
+}      
         /* Reproductor personalizado PROFESIONAL */
 .audio-container {
   position: relative;
@@ -302,22 +329,25 @@
 
       <h2 class="ep-title">EP: Pulso</h2>
 
-      <div class="cancion-card">
-        <h3>Tinkuy</h3>
-        <div class="audio-container">
-  <button class="play-btn" onclick="togglePlay('tinkuy-audio')">▶️</button>
-  <div class="progress-container">
-    <div class="progress-bar" id="tinkuy-progress"></div>
+      <!-- CANCIÓN TINKUY -->
+<div class="cancion-card">
+  <h3>Tinkuy</h3>
+  <div class="audio-container">
+    <button class="play-btn" onclick="togglePlay('tinkuy-audio')"></button>
+    <div class="progress-container" onclick="setProgress('tinkuy-audio', event)">
+      <div class="progress-bar" id="tinkuy-progress"></div>
+    </div>
+    <div class="time-display" id="tinkuy-time">0:00 / 4:31</div>
+    <div class="volume-container">
+      <button class="volume-btn" onclick="toggleMute('tinkuy-audio')"></button>
+      <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1" oninput="setVolume('tinkuy-audio', this)">
+    </div>
+    <audio id="tinkuy-audio" src="audio/tinkuy.mp3" type="audio/mpeg" onloadedmetadata="setDuration('tinkuy-audio')">
   </div>
-  <div class="time-display" id="tinkuy-time">0:00 / 4:31</div>
-  <div class="volume-container">
-    <button class="volume-btn" onclick="toggleVolume()">🔊</button>
-    <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.1" value="1">
-  </div>
-  <audio id="tinkuy-audio" src="audio/tinkuy.mp3" type="audio/mpeg">
 </div>
-        
-      <div class="cancion-card">
+
+<!-- CANCIÓN NAVI -->
+<div class="cancion-card">
   <h3>Navi</h3>
   <div class="audio-container">
     <button class="play-btn" onclick="togglePlay('navi-audio')"></button>
@@ -333,7 +363,8 @@
   </div>
 </div>
 
-      <div class="cancion-card">
+<!-- CANCIÓN SAMI -->
+<div class="cancion-card">
   <h3>Sami</h3>
   <div class="audio-container">
     <button class="play-btn" onclick="togglePlay('sami-audio')"></button>

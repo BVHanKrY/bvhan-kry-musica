@@ -248,12 +248,12 @@
   background-color: transparent;
   border: none;
   color: white;
-  font-size: 0; /* Ocultar texto */
+  font-size: 0;
   cursor: pointer;
   margin-right: 5px;
 }
 
-/* ICONO DE BOCINA PROFESIONAL */
+/* Icono de bocina profesional */
 .volume-btn::before {
   content: "";
   display: block;
@@ -270,7 +270,7 @@
   filter: invert(1) brightness(0.9) sepia(15%) saturate(4000%) hue-rotate(260deg);
 }
 
-/* Slider de volumen VERTICAL FUNCIONAL */
+/* Slider de volumen */
 .volume-slider {
   position: absolute;
   top: -90px;
@@ -286,9 +286,9 @@
   appearance: none;
   outline: none;
   cursor: pointer;
-  transform: rotate(270deg); /* Gira para que sea vertical */
-  transform-origin: right top; /* Punto de giro correcto */
-  z-index: 10; /* Asegura que esté por encima de otros elementos */
+  transform: rotate(270deg);
+  transform-origin: right top;
+  z-index: 10;
 }
 
 .volume-slider::-webkit-slider-thumb {
@@ -300,11 +300,6 @@
   border-radius: 50%;
   cursor: pointer;
   box-shadow: 0 0 5px rgba(168, 85, 247, 0.8);
-  transition: transform 0.2s ease;
-}
-
-.volume-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.1);
 }
 
 .volume-slider::-webkit-slider-runnable-track {
@@ -315,16 +310,14 @@
   height: 6px;
 }
 
-/* MANTENER SLIDER VISIBLE EN COMPUTADORAS CUANDO SE INTERACTÚA */
+/* Solo para computadoras: slider se mantiene visible */
 @media only screen and (min-width: 769px) {
-  .volume-container:hover .volume-slider,
-  .volume-slider:hover,
-  .volume-slider:focus {
+  .volume-slider.active {
     display: block;
   }
 }
 
-/* MANTENER COMPORTAMIENTO ORIGINAL EN CELULARES */
+/* Para celulares: comportamiento original */
 @media only screen and (max-width: 768px) {
   .volume-container:hover .volume-slider {
     display: block;
@@ -474,6 +467,29 @@ function toggleMute(audioId) {
     audio.muted = true;
     volumeSlider.value = 0;
     volumeBtn.classList.add('muted');
+    // Función para mostrar/ocultar slider en computadoras
+function toggleVolumeSlider(slider) {
+  // Solo aplicar en computadoras
+  if (window.innerWidth >= 769) {
+    slider.classList.toggle('active');
+    // Cerrar slider si se hace clic fuera
+    document.addEventListener('click', function(e) {
+      if (!slider.contains(e.target) && !e.target.classList.contains('volume-btn')) {
+        slider.classList.remove('active');
+      }
+    });
+  }
+}
+
+// Ajustar volumen
+function setVolume(audioId, slider) {
+  const audio = document.getElementById(audioId);
+  const volumeValue = parseFloat(slider.value);
+  audio.volume = volumeValue;
+  audio.muted = false;
+  
+  const volumeBtn = document.querySelector(`[onclick="toggleMute('${audioId}')"]`);
+  volumeBtn.classList.toggle('muted', volumeValue === 0);
   }
 }
 </script>

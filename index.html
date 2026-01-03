@@ -166,12 +166,23 @@ audio::-webkit-media-controls-time-remaining-display {
   audio {
     height: 70px;
     position: relative;
+    padding-right: 50px; /* Espacio para que no se solape el volumen */
+  }
+
+  /* Mover el icono de volumen y slider más a la derecha */
+  audio::-webkit-media-controls-volume-control-container {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
   }
 
   audio::-webkit-media-controls-volume-slider {
     position: absolute;
-    top: -80px;
-    right: 20px;
+    top: -90px; /* Más arriba para no solapar */
+    right: 0;
     width: 15px;
     height: 60px;
     background-color: rgba(26, 26, 26, 0.95);
@@ -179,6 +190,7 @@ audio::-webkit-media-controls-time-remaining-display {
     padding: 5px;
     border: 1px solid #a855f7;
     transition: all 0.2s ease;
+    display: none; /* Ocultar hasta que se toque */
   }
 
   audio::-webkit-media-controls-volume-slider::-webkit-slider-thumb {
@@ -189,9 +201,10 @@ audio::-webkit-media-controls-time-remaining-display {
     cursor: pointer;
   }
 
-  audio:hover::-webkit-media-controls-volume-slider,
-  audio:focus::-webkit-media-controls-volume-slider,
-  audio:active::-webkit-media-controls-volume-slider {
+  /* Mostrar solo cuando se toque el icono de volumen */
+  audio::-webkit-media-controls-volume-control-container:hover + audio::-webkit-media-controls-volume-slider,
+  audio::-webkit-media-controls-volume-control-container:focus + audio::-webkit-media-controls-volume-slider,
+  audio::-webkit-media-controls-volume-slider:hover {
     display: block;
   }
 }
@@ -205,7 +218,6 @@ audio::-webkit-media-controls-time-remaining-display {
     margin-left: 10px;
   }
 }
-/* HASTA AQUÍ LLEGAN LOS NUEVOS ESTILOS */
       
     </style>
   </head>

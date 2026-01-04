@@ -490,6 +490,45 @@
 header {
     margin-bottom: 20px; /* Aumenta la distancia entre el título y el contenido */
 }
+
+    /* Estilo base de la tarjeta */
+.cancion-tarjeta {
+    position: relative; /* Para posicionar el contador de reproducciones */
+}
+
+/* Contador de reproducciones - Esquina superior derecha */
+.contador-reproducciones {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 12px;
+    color: #b3b3b3;
+}
+
+/* Estilo del reproductor y contenedor de gustos */
+.gustos-contenedor {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px; /* Espacio adicional */
+}
+
+.btn-corazon {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.btn-corazon:hover {
+    color: #ff4d4d;
+}
+
+.numero-gustos {
+    font-size: 12px;
+    color: #b3b3b3;
+} 
      
     </style>
   </head>
@@ -559,6 +598,18 @@ header {
         <audio id="tinkuy-audio" src="audio/tinkuy.mp3" type="audio/mpeg" onloadedmetadata="setDuration('tinkuy-audio')">
          <!-- Cierra la etiqueta audio que faltaba -->
     </div>
+
+    <!-- CONTADOR DE REPRODUCCIONES/VISITAS - ESQUINA SUPERIOR DERECHA -->
+   <div class="contador-reproducciones">
+     <span>Reproducciones: <strong id="contador-visitas-tinkuy">0</strong></span>
+   </div>
+
+   <!-- CORAZÓN Y CONTADOR DE ME GUSTAS -->
+   <div class="gustos-contenedor">
+     <button class="btn-corazon" id="btn-me-gusta-tinkuy" onclick="agregarMeGusta('tinkuy')">❤️</button>
+     <span class="numero-gustos" id="contador-me-gustas-tinkuy">0</span>
+   </div>
+ 
     <!-- AVISO ESPECÍFICO POR CANCIÓN -->
     <div class="song-copyright">
         <p>Compositor: BVHanKrY | Producción: BVros</p>
@@ -589,6 +640,18 @@ header {
         </div>
         <audio id="navi-audio" src="audio/navi.mp3" type="audio/mpeg" onloadedmetadata="setDuration('navi-audio')"></audio>
     </div>
+
+    <!-- CONTADOR DE REPRODUCCIONES/VISITAS - ESQUINA SUPERIOR DERECHA -->
+   <div class="contador-reproducciones">
+     <span>Reproducciones: <strong id="contador-visitas-tinkuy">0</strong></span>
+   </div>
+
+   <!-- CORAZÓN Y CONTADOR DE ME GUSTAS -->
+   <div class="gustos-contenedor">
+     <button class="btn-corazon" id="btn-me-gusta-tinkuy" onclick="agregarMeGusta('Navi')">❤️</button>
+     <span class="numero-gustos" id="contador-me-gustas-tinkuy">0</span>
+   </div>
+ 
     <div class="song-copyright">
         <p>Compositor: BVHanKrY | Producción: BVros</p>
         <p>℗ 2026 BVHanKrY - No para uso público</p>
@@ -617,6 +680,18 @@ header {
         </div>
         <audio id="sami-audio" src="audio/sami.mp3" type="audio/mpeg" onloadedmetadata="setDuration('sami-audio')"></audio>
     </div>
+
+    <!-- CONTADOR DE REPRODUCCIONES/VISITAS - ESQUINA SUPERIOR DERECHA -->
+   <div class="contador-reproducciones">
+     <span>Reproducciones: <strong id="contador-visitas-tinkuy">0</strong></span>
+   </div>
+
+   <!-- CORAZÓN Y CONTADOR DE ME GUSTAS -->
+   <div class="gustos-contenedor">
+     <button class="btn-corazon" id="btn-me-gusta-tinkuy" onclick="agregarMeGusta('tinkuy')">❤️</button>
+     <span class="numero-gustos" id="contador-me-gustas-tinkuy">0</span>
+   </div>
+ 
     <div class="song-copyright">
         <p>Compositor: BVHanKrY | Producción: BVros</p>
         <p>℗ 2026 BVHanKrY - No para uso público</p>
@@ -749,6 +824,55 @@ document.addEventListener('contextmenu', function(e) {
         e.preventDefault();
     }
 });
+
+  // CONTADOR DE REPRODUCCIONES/VISITAS
+function incrementarVisitas(cancionId) {
+    let contadorVisitas = localStorage.getItem(`contadorVisitas-${cancionId}`) || 0;
+    contadorVisitas++;
+    localStorage.setItem(`contadorVisitas-${cancionId}`, contadorVisitas);
+    const elementoContadorVisitas = document.getElementById(`contador-visitas-${cancionId}`);
+    elementoContadorVisitas.textContent = contadorVisitas;
+}
+
+//CONTADOR DE ME GUSTAS
+function agregarMeGusta(cancionId) {
+    let contadorMeGustas = localStorage.getItem(`contadorMeGustas-${cancionId}`) || 0;
+    const elementoContadorMeGustas = document.getElementById(`contador-me-gustas-${cancionId}`);
+    const btnCorazon = document.getElementById(`btn-me-gusta-${cancionId}`);
+
+    if (localStorage.getItem(`usuarioDioMeGusta-${cancionId}`) !== 'true') {
+        contadorMeGustas++;
+        localStorage.setItem(`contadorMeGustas-${cancionId}`, contadorMeGustas);
+        localStorage.setItem(`usuarioDioMeGusta-${cancionId}`, 'true');
+        elementoContadorMeGustas.textContent = contadorMeGustas;
+        btnCorazon.style.color = '#ff4d4d';
+        alert('¡Gracias por tu me gusta!');
+    } else {
+        alert('Ya has dado me gusta a esta canción :)');
+    }
+}
+
+// Inicialización de contadores al cargar la página
+window.onload = function() {
+    // Para cada canción...
+    ['tinkuy', 'navi', 'sami'].forEach(cancionId => {
+        // Actualizar contador de visitas
+        incrementarVisitas(cancionId);
+        const elementoContadorVisitas = document.getElementById(`contador-visitas-${cancionId}`);
+        let contadorVisitas = localStorage.getItem(`contadorVisitas-${cancionId}`) || 0;
+        elementoContadorVisitas.textContent = contadorVisitas;
+
+        // Actualizar contador de "me gusta" y estado del corazón
+        const elementoContadorMeGustas = document.getElementById(`contador-me-gustas-${cancionId}`);
+        let contadorMeGustas = localStorage.getItem(`contadorMeGustas-${cancionId}`) || 0;
+        elementoContadorMeGustas.textContent = contadorMeGustas;
+
+        const btnCorazon = document.getElementById(`btn-me-gusta-${cancionId}`);
+        if (localStorage.getItem(`usuarioDioMeGusta-${cancionId}`) === 'true') {
+            btnCorazon.style.color = '#ff4d4d';
+        }
+    });
+};
   
     </script>
         

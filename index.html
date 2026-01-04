@@ -337,6 +337,58 @@
             }
         }
      
+     /* Estilos para aviso de derechos de autor */
+.copyright-section {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(168, 85, 247, 0.3);
+    text-align: center;
+    font-size: 0.9em;
+    color: #d1d5db;
+}
+
+.copyright-subtext {
+    font-size: 0.8em;
+    margin: 5px 0;
+    color: #888;
+}
+
+/* Estilos para aviso por canción */
+.song-copyright {
+    margin-top: 10px;
+    padding-top: 5px;
+    border-top: 1px solid rgba(168, 85, 247, 0.1);
+    font-size: 0.75em;
+    color: #a855f7;
+    text-align: center;
+}
+
+/* Estilos para botón de compartir */
+.share-button-container {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.share-whatsapp {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #25d366;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 0.85em;
+    transition: background-color 0.2s ease;
+}
+
+.share-whatsapp:hover {
+    background-color: #128c7e;
+}
+
+/* Para que el icono de WhatsApp se vea bien (si usas Font Awesome) */
+.fab.fa-whatsapp {
+    margin-right: 5px;
+}
+     
     </style>
   </head>
   <body>
@@ -347,56 +399,92 @@
       </header>
       <h2 class="ep-title">EP: Pulso</h2>
 
-      <!-- CANCIÓN TINKUY -->
-<div class="cancion-card">
-  <h3>Tinkuy</h3>
-  <div class="audio-container">
-    <button class="play-btn" onclick="togglePlay('tinkuy-audio')"></button>
-    <div class="progress-container" onclick="setProgress('tinkuy-audio', event)">
-      <div class="progress-bar" id="tinkuy-progress"></div>
+<!-- CANCIÓN TINKUY -->
+<div class="cancion-card animate__animated animate__fadeInUp" style="animation-delay: 0.5s;">
+    <h3>Tinkuy</h3>
+    <div class="audio-container" oncontextmenu="return false;"> <!-- Evita clic derecho -->
+        <button class="play-btn" onclick="togglePlay('tinkuy-audio')"></button>
+        <div class="progress-container" onclick="setProgress('tinkuy-audio', event)">
+            <div class="progress-bar" id="tinkuy-progress"></div>
+        </div>
+        <div class="time-display" id="tinkuy-time">0:00 / 4:31</div>
+        <div class="volume-container">
+            <button class="volume-btn" onclick="toggleMute('tinkuy-audio')"></button>
+            <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1" oninput="setVolume('tinkuy-audio', this)">
+        </div>
+        <audio id="tinkuy-audio" src="audio/tinkuy.mp3" type="audio/mpeg" onloadedmetadata="setDuration('tinkuy-audio')">
+         <!-- Cierra la etiqueta audio que faltaba -->
     </div>
-    <div class="time-display" id="tinkuy-time">0:00 / 4:31</div>
-    <div class="volume-container">
-      <button class="volume-btn" onclick="toggleMute('tinkuy-audio')"></button>
-      <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1" oninput="setVolume('tinkuy-audio', this)">
+    <!-- AVISO ESPECÍFICO POR CANCIÓN -->
+    <div class="song-copyright">
+        <p>Compositor: BVHanKrY | Producción: BVHanKrY</p>
+        <p>℗ 2026 BVHanKrY - No para uso público</p>
     </div>
-    <audio id="tinkuy-audio" src="audio/tinkuy.mp3" type="audio/mpeg" onloadedmetadata="setDuration('tinkuy-audio')">
-  </div>
+    <!-- BOTÓN DE COMPARTIR -->
+    <div class="share-button-container">
+        <a href="https://wa.me/?text=¡Escucha%20%22Tinkuy%22%20de%20BVHanKrY%20-%20EP%20Pulso!%20https://bvhankry.onrender.com/tinkuy" 
+           target="_blank" 
+           class="share-whatsapp">
+            <i class="fab fa-whatsapp"></i> Compartir en WhatsApp
+        </a>
+    </div>
 </div>
 
 <!-- CANCIÓN NAVI -->
-<div class="cancion-card">
-  <h3>Navi</h3>
-  <div class="audio-container">
-    <button class="play-btn" onclick="togglePlay('navi-audio')"></button>
-    <div class="progress-container" onclick="setProgress('navi-audio', event)">
-      <div class="progress-bar" id="navi-progress"></div>
+<div class="cancion-card animate__animated animate__fadeInUp" style="animation-delay: 1s;">
+    <h3>Navi</h3>
+    <div class="audio-container" oncontextmenu="return false;">
+        <button class="play-btn" onclick="togglePlay('navi-audio')"></button>
+        <div class="progress-container" onclick="setProgress('navi-audio', event)">
+            <div class="progress-bar" id="navi-progress"></div>
+        </div>
+        <div class="time-display" id="navi-time">0:00 / 0:00</div>
+        <div class="volume-container">
+            <button class="volume-btn" onclick="toggleMute('navi-audio')"></button>
+            <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1" oninput="setVolume('navi-audio', this)">
+        </div>
+        <audio id="navi-audio" src="audio/navi.mp3" type="audio/mpeg" onloadedmetadata="setDuration('navi-audio')"></audio>
     </div>
-    <div class="time-display" id="navi-time">0:00 / 0:00</div>
-    <div class="volume-container">
-      <button class="volume-btn" onclick="toggleMute('navi-audio')"></button>
-      <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1" oninput="setVolume('navi-audio', this)">
+    <div class="song-copyright">
+        <p>Compositor: BVHanKrY | Producción: BVHanKrY</p>
+        <p>℗ 2026 BVHanKrY - No para uso público</p>
     </div>
-    <audio id="navi-audio" src="audio/navi.mp3" type="audio/mpeg" onloadedmetadata="setDuration('navi-audio')">
-  </div>
+    <div class="share-button-container">
+        <a href="https://wa.me/?text=¡Escucha%20%22Navi%22%20de%20BVHanKrY%20-%20EP%20Pulso!%20https://www.bvhankry.com/navi"
+           target="_blank" 
+           class="share-whatsapp">
+            Compartir en WhatsApp
+        </a>
+    </div>
 </div>
- 
+
 <!-- CANCIÓN SAMI -->
-<div class="cancion-card">
-  <h3>Sami</h3>
-  <div class="audio-container">
-    <button class="play-btn" onclick="togglePlay('sami-audio')"></button>
-    <div class="progress-container" onclick="setProgress('sami-audio', event)">
-      <div class="progress-bar" id="sami-progress"></div>
+<div class="cancion-card animate__animated animate__fadeInUp" style="animation-delay: 1.5s;">
+    <h3>Sami</h3>
+    <div class="audio-container" oncontextmenu="return false;">
+        <button class="play-btn" onclick="togglePlay('sami-audio')"></button>
+        <div class="progress-container" onclick="setProgress('sami-audio', event)">
+            <div class="progress-bar" id="sami-progress"></div>
+        </div>
+        <div class="time-display" id="sami-time">0:00 / 0:00</div>
+        <div class="volume-container">
+            <button class="volume-btn" onclick="toggleMute('sami-audio')"></button>
+            <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1" oninput="setVolume('sami-audio', this)">
+        </div>
+        <audio id="sami-audio" src="audio/sami.mp3" type="audio/mpeg" onloadedmetadata="setDuration('sami-audio')"></audio>
     </div>
-    <div class="time-display" id="sami-time">0:00 / 0:00</div>
-    <div class="volume-container">
-      <button class="volume-btn" onclick="toggleMute('sami-audio')"></button>
-      <input type="range" class="volume-slider" min="0" max="1" step="0.05" value="1" oninput="setVolume('sami-audio', this)">
+    <div class="song-copyright">
+        <p>Compositor: BVHanKrY | Producción: BVHanKrY</p>
+        <p>℗ 2026 BVHanKrY - No para uso público</p>
     </div>
-    <audio id="sami-audio" src="audio/sami.mp3" type="audio/mpeg" onloadedmetadata="setDuration('sami-audio')">
-  </div>
-</div>  
+    <div class="share-button-container">
+        <a href="https://wa.me/?text=¡Escucha%20%22Sami%22%20de%20BVHanKrY%20-%20EP%20Pulso!%20https://www.bvhankry.com/sami"
+           target="_blank" 
+           class="share-whatsapp">
+            Compartir en WhatsApp
+        </a>
+    </div>
+</div>
 
  <script>
         // Formatear tiempo
@@ -497,6 +585,15 @@
                 }
             });
         });
+
+  // Evitar descarga de imágenes y contenidos
+document.addEventListener('contextmenu', function(e) {
+    // Solo permite clic derecho en elementos que no sean audio o imágenes
+    if (e.target.tagName === 'AUDIO' || e.target.tagName === 'IMG' || e.target.classList.contains('audio-container')) {
+        e.preventDefault();
+    }
+});
+  
     </script>
   </body>
 </html>

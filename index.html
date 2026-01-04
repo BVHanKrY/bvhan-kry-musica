@@ -523,6 +523,10 @@ header {
 .heart-btn {
   transition: color 0.2s ease;
 }
+     /*Estilo del corazon*/
+     .cancion-card h3.liked::before {
+  filter: none; /* Elimina los filtros para mostrar el corazón "lleno" */
+}
      
     </style>
   </head>
@@ -578,7 +582,7 @@ header {
 
 <!-- CANCIÓN TINKUY -->
 <div class="cancion-card animate__animated animate__fadeInUp" style="animation-delay: 0.5s;">
-    <h3>Tinkuy</h3>
+    <h3 id="corazon-tinkuy">Tinkuy</h3>
     <div class="audio-container" oncontextmenu="return false;"> <!-- Evita clic derecho -->
         <button class="play-btn" onclick="togglePlay('tinkuy-audio')"></button>
         <div class="progress-container" onclick="setProgress('tinkuy-audio', event)">
@@ -622,7 +626,7 @@ header {
 
 <!-- CANCIÓN NAVI -->
 <div class="cancion-card animate__animated animate__fadeInUp" style="animation-delay: 1s;">
-    <h3>Navi</h3>
+    <h3 id="corazon-navi">Navi</h3>
     <div class="audio-container" oncontextmenu="return false;">
         <button class="play-btn" onclick="togglePlay('navi-audio')"></button>
         <div class="progress-container" onclick="setProgress('navi-audio', event)">
@@ -663,7 +667,7 @@ header {
 
 <!-- CANCIÓN SAMI -->
 <div class="cancion-card animate__animated animate__fadeInUp" style="animation-delay: 1.5s;">
-    <h3>Sami</h3>
+    <h3 id="corazon-sami">Sami</h3>
     <div class="audio-container" oncontextmenu="return false;">
         <button class="play-btn" onclick="togglePlay('sami-audio')"></button>
         <div class="progress-container" onclick="setProgress('sami-audio', event)">
@@ -827,21 +831,21 @@ document.addEventListener('contextmenu', function(e) {
     }
 });
 
-/* === FUNCIONES NUEVAS - ADAPTADAS A REVIEWS Y RESPONSIVE === */
+/* === FUNCIONES NUEVAS - ADAPTADAS AL CORAZÓN PÚRPURA === */
 
-// Función para cargar el contador de Reviews
+// Función para cargar el contador de Reviews (sin cambios)
 function cargarContadorReviews(nombreCancion) {
   let reviews = localStorage.getItem(`reviews-${nombreCancion}`) || 0;
   reviews = parseInt(reviews) + 1;
   localStorage.setItem(`reviews-${nombreCancion}`, reviews);
   document.getElementById(`reviews-${nombreCancion}`).querySelector('strong').textContent = reviews;
-  actualizarContadorTotal(); // Actualizamos el contador total
+  actualizarContadorTotal();
 }
 
-// Función para activar el "Me Gusta"
+// Función para activar el "Me Gusta" y rellenar el corazón
 function activarMeGusta(nombreCancion) {
   const corazon = document.getElementById(`corazon-${nombreCancion}`);
-  const numGusta = document.getElementById(`num-gustos-${nombreCancion}`);
+  const numGustos = document.getElementById(`num-gustos-${nombreCancion}`);
 
   if (localStorage.getItem(`gusto-${nombreCancion}`) === 'activado') {
     alert('¡Ya le diste "Me Gusta" a esta canción! 🎵');
@@ -853,15 +857,15 @@ function activarMeGusta(nombreCancion) {
   localStorage.setItem(`cant-gustos-${nombreCancion}`, gustos);
   localStorage.setItem(`gusto-${nombreCancion}`, 'activado');
 
-  corazon.style.color = '#ff3a3a';
-  numGusta.textContent = gustos;
+  corazon.classList.add('liked'); // Agrega la clase "liked" al encabezado <h3>
+  numGustos.textContent = gustos;
   alert('¡Gracias por tu "Me Gusta"! 🙏');
 }
 
-// Función para actualizar el contador total de Reviews
+// Función para actualizar el contador total de Reviews (sin cambios)
 function actualizarContadorTotal() {
   let total = 0;
-  const canciones = ['tinkuy', 'navi', 'sami']; // Lista de canciones
+  const canciones = ['tinkuy', 'navi', 'sami'];
   canciones.forEach(cancion => {
     total += parseInt(localStorage.getItem(`reviews-${cancion}`) || 0);
   });
@@ -883,11 +887,11 @@ window.onload = function() {
     const gustosGuardados = localStorage.getItem(`cant-gustos-${cancion}`) || 0;
     numGustos.textContent = gustosGuardados;
 
-    if (localStorage.getItem(`gusto-${cancion}`) === 'activado') {
-      corazon.style.color = '#ff3a3a';
+    if (localStorage.getItem(`gusto-${nombreCancion}`) === 'activado') {
+      corazon.classList.add('liked'); // Agrega la clase "liked" al encabezado <h3>
     }
   });
-  actualizarContadorTotal(); // Aseguramos que el contador total se cargue al inicio
+  actualizarContadorTotal();
 };
   
     </script>

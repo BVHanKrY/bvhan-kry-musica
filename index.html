@@ -468,6 +468,28 @@
 .nav-links a:hover {
     color: #a855f7; /* Cambia el color al pasar el ratón */
 }
+
+     /* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+    /* Estilos para dispositivos con un ancho de pantalla máximo de 768 píxeles */
+    .nav-container {
+        flex-direction: column; /* Apila los elementos verticalmente */
+        align-items: center; /* Centra los elementos horizontalmente */
+    }
+
+    .nav-links {
+        margin-bottom: 10px; /* Añade espacio debajo de los enlaces */
+    }
+
+    .social-links {
+        margin-top: 10px; /* Añade espacio encima de los iconos de redes sociales */
+    }
+}
+
+     /* Estilos para el margen */
+header {
+    margin-bottom: 20px; /* Aumenta la distancia entre el título y el contenido */
+}
      
     </style>
   </head>
@@ -514,11 +536,11 @@
         <h1>BVHanKrY</h1>
         <p>DUB Music - Ecuador</p>
 
-       <section id="Music">
-    <h2>Músic</h2> <!-- Contenido de la sección "Music" -->
+       <section id="music">
+    <h2 style="margin-top: 25px;">Música</h2> <!-- Contenido de la sección "Music" -->
 </section>
        
-      </header>
+      </header> 
       <h2 class="ep-title">EP: Pulso</h2>
 
 <!-- CANCIÓN TINKUY -->

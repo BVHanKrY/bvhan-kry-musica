@@ -6,7 +6,7 @@
     <meta name="description" content="BVHanKrY - Música Dub desde Ecuador. Escucha el EP Pulso con canciones como Tinkuy, Navi y Sami.">
     <meta name="keywords" content="BVHanKrY, música dub, Ecuador, EP Pulso, Tinkuy, música electrónica">
     <title>BVHanKrY - Música Oficial</title>
-    <link rel="icon" href="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/multimedia/BVHANKRY-Photoroom.png" type="image/png">
+    <link rel="icon" href="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/multimedia/BVHANKRY-Photoroom.png" type="image/png">
     <style>
         * {
             margin: 0;
@@ -16,7 +16,7 @@
         }
         
         body {
-            background-image: url(https://github.com/BVHanKrY/bvhankry.music/blob/main/ChatGPT%20Image%2030%20dic%202025,%2010_59_54%20a.m..png?raw=true), linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
+            background-image: url(https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/refs/heads/main/fondo/ChatGPT%20Image%2030%20dic%202025%2C%2010_59_54%20a.m..png), linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
             background-blend-mode: overlay;
             background-size: cover;
             background-position: center;
@@ -795,7 +795,10 @@
             const audio = document.getElementById(audioId);
             const btn = document.querySelector(`[onclick="togglePlay('${audioId}')"]`);
             const container = btn.closest('.audio-container');
-            
+
+            if (!audio.src || audio.src.includes('undefined')) {
+                alert('El archivo de audio no está disponible. Por favor, sube el archivo MP3 a GitHub en la carpeta /audio/');
+                return;
             }
 
             // Detener todos los demás audios

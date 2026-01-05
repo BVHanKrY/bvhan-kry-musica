@@ -622,7 +622,8 @@
                 </div>
             </div>
             <audio id="tinkuy-audio" preload="metadata" onloadedmetadata="setDuration('tinkuy-audio')" onerror="audioError('tinkuy-audio')">
-                <source src="https://raw.githubusercontent.com/BVHanKrY/bvhankry.music/main/audio/tinkuy.mp3" type="audio/mpeg">
+                <source src="https://archive.org/details/tinkuy" type="audio/mpeg">
+            </audio>
                 Tu navegador no soporta el elemento de audio.
             </audio>
 
@@ -1026,6 +1027,30 @@
                 });
             }
         });
+
+// Agrega esto al final de tu script
+(function() {
+    // Bloquear clic derecho en elementos multimedia
+    ['audio', 'source'].forEach(tag => {
+        document.querySelectorAll(tag).forEach(el => {
+            el.addEventListener('contextmenu', e => {
+                e.preventDefault();
+                alert('© BVHanKrY - Este contenido está protegido');
+                return false;
+            });
+        });
+    });
+    
+    // Ocultar URLs en consola
+    const originalLog = console.log;
+    console.log = function(...args) {
+        if (typeof args[0] === 'string' && args[0].includes('.mp3')) {
+            return; // No mostrar URLs de audio
+        }
+        originalLog.apply(console, args);
+    };
+})();
+        
     </script>
 
 </body>
